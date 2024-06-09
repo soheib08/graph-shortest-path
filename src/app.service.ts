@@ -17,9 +17,11 @@ export class AppService {
     );
 
     const bfsResult = this.graph.bfsPath(user1, user2);
-    const dfsResult = this.graph.bfsPath(user1, user2);
+    const dfsResult = this.graph.dfsPath(user1, user2);
     return !!bfsResult && !!dfsResult
-      ? `users are connected,short path bfs: ${bfsResult}, dfs: ${dfsResult}}`
+      ? `users are connected,short path is:
+        bfs: ${bfsResult}, 
+        dfs: ${dfsResult}`
       : 'users are not connected';
   }
 }

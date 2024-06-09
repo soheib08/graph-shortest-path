@@ -26,11 +26,13 @@ async function bootstrap() {
   });
 
   while (true) {
-    const input = await askQuestion('Enter a command (start or exit): ');
+    const input = (await askQuestion('Enter a command (start or exit): '))
+      .trim()
+      .toLowerCase();
 
     if ((input as string).toLowerCase() === 'start') {
-      const start = await askQuestion('Enter the start user: ');
-      const target = await askQuestion('Enter the target user: ');
+      const start = (await askQuestion('Enter the start user: ')).trim();
+      const target = (await askQuestion('Enter the target user: ')).trim();
       const path = await appService.calculate(
         start as string,
         target as string,
