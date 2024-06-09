@@ -2,9 +2,14 @@ import { Injectable } from '@nestjs/common';
 import fs from 'fs/promises';
 
 @Injectable()
-export class DBService {
+export class DatasetService {
   async initDB() {
-    console.log(process.env.NUM_USERS, process.env.NUM_CONNECTIONS);
+    console.log(
+      'number of users:',
+      process.env.NUM_USERS,
+      'number of connections:',
+      process.env.NUM_CONNECTIONS,
+    );
 
     if (
       !Number(process.env.NUM_USERS) ||

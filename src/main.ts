@@ -2,32 +2,54 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as readline from 'readline';
 import 'dotenv/config';
-import { DBService } from './db.service';
 import { AppService } from './app.service';
+import { DatasetService } from './dataset.service';
+var util = require('util');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+var askQuestion = util.promisify(rl.question).bind(rl);
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule, {
     logger: false,
   });
   const appService = app.get(AppService);
-  const dbService = app.get(DBService);
-
-  const dataset = await dbService.initDB();
+  const datasetService = app.get(DatasetService);
+  const dataset = await datasetService.initDB();
 
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
 
-  rl.question('Please enter userIds separated by commas: ', async (input) => {
-    const users = input.split(',').map((url) => url.trim());
-    if (users.length != 2) throw new Error('you can only submit 2 users');
+  while (true) {
+    const input = await askQuestion('Enter a command (start or exit): ');
 
-    console.log(dataset.connections.length, dataset.users.length);
-    const result = await appService.calculate(users[0], users[1], dataset);
-    console.log(result);
+    if ((input as string).toLowerCase() === 'start') {
+      const start = await askQuestion('Enter the start user: ');
+      const target = await askQuestion('Enter the target user: ');
+      const path = await appService.calculate(
+        start as string,
+        target as string,
+        dataset,
+      );
 
-    rl.close();
-  });
+      if (path) {
+        console.log(path);
+      } else {
+        console.log('No path found');
+      }
+    } else if ((input as string) === 'exit') {
+      console.log('Goodbye!');
+      rl.close();
+      break;
+    } else {
+      console.log('Invalid command. Please enter "start" or "exit".');
+    }
+  }
 }
+
 bootstrap();

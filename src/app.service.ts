@@ -18,7 +18,6 @@ export class AppService {
 
     const bfsResult = this.graph.bfsPath(user1, user2);
     const dfsResult = this.graph.bfsPath(user1, user2);
-
     return !!bfsResult && !!dfsResult
       ? `users are connected,short path bfs: ${bfsResult}, dfs: ${dfsResult}}`
       : 'users are not connected';
