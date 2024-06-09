@@ -13,4 +13,4 @@ This application allows users to find the shortest path between two users in a s
 
 ### Why BFS?
 
-BFS (Breadth-First Search) is preferred for this problem because it systematically explores neighbors level by level, ensuring that the shortest path is discovered as soon as the target user is reached. This makes it ideal for finding the shortest path between users in an unweighted graph, such as a social network.
+BFS (Breadth-First Search) is preferred for this problem because it systematically explores neighbors level by level, ensuring that the shortest path is discovered as soon as the target user is reached. This makes it ideal for finding the shortest path between users in an unweighted graph, such as a social network. DFS (Depth-First Search) is not suitable for this problem because it explores paths deeply before backtracking, potentially leading to long and inefficient paths. DFS does not guarantee finding the shortest path in an unweighted graph and may miss the shortest path entirely if it explores a longer path first.
