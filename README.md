@@ -1,5 +1,16 @@
-##Installation
-npm i
+## User Pathfinding Problem
 
-##start
-npm run start
+This application allows users to find the shortest path between two users in a social network graph.
+
+### Instructions
+
+1. Clone the repository and navigate to the project directory.
+2. Install dependencies using `npm install`.
+3. Copy the `.env.example` file to `.env` (`cp .env.example .env`).
+4. Adjust the `NUMBER_OF_USERS` and `NUMBER_OF_CONNECTIONS` variables in the `.env` file to set the desired number of users and connections.
+5. Run the application using `npm start`.
+6. Follow the prompts to enter the start and target users.
+
+### Why BFS?
+
+BFS (Breadth-First Search) is preferred for this problem because it systematically explores neighbors level by level, ensuring that the shortest path is discovered as soon as the target user is reached. This makes it ideal for finding the shortest path between users in an unweighted graph, such as a social network.
